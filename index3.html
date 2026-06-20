@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.Tech 1st Year Study Materials</title>
+    <style>
+        /* --- Global Styles & Reset --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* --- Welcome Screen --- */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            cursor: pointer;
+            transition: transform 0.6s ease-in-out, opacity 0.4s ease;
+        }
+
+        .welcome-text {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite alternate;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .tap-instruction {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            animation: blink 1.5s infinite;
+        }
+
+        /* --- Main Content Layout --- */
+        #main-content {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        header h1 {
+            color: #1e3c72;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #666;
+        }
+
+        /* --- Grid for Subjects --- */
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .subject-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #2a5298;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .subject-card h3 {
+            color: #222;
+            font-size: 1.3rem;
+            line-height: 1.4;
+        }
+
+        /* --- Unit Viewer --- */
+        #unit-viewer {
+            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .viewer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .viewer-header h2 {
+            color: #1e3c72;
+            font-size: 1.8rem;
+        }
+
+        .back-btn {
+            background: #1e3c72;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .back-btn:hover {
+            background: #2a5298;
+        }
+
+        .units-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .unit-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .unit-info h4 {
+            color: #2a5298;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .unit-info p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .pdf-btn {
+            background-color: #dc3545;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .pdf-btn:hover {
+            background-color: #bd2130;
+        }
+
+        /* --- Animations --- */
+        @keyframes pulse { 0% { transform: scale(0.98); } 100% { transform: scale(1.02); } }
+        @keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-out { opacity: 0; transform: translateY(-100vh); pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div id="welcome-screen" onclick="enterSite()">
+        <div class="welcome-text">WELCOME</div>
+        <div class="tap-instruction">Click anywhere to explore modules</div>
+    </div>
+
+    <div id="main-content">
+        <header>
+            <h1>1st Year Engineering Study Materials</h1>
+            <p>Select a subject to view unit details and download specific PDFs.</p>
+        </header>
+
+        <div class="subjects-grid" id="subjects-grid">
+            <div class="subject-card" onclick="showUnits('maths')"><h3>Engineering Mathematics 1</h3></div>
+            <div class="subject-card" onclick="showUnits('maths')"><h3>Engineering Mathematics 2</h3></div>
+            <div class="subject-card" onclick="showUnits('chemistry')"><h3>Engineering Chemistry</h3></div>
+            <div class="subject-card" onclick="showUnits('physics')"><h3>Engineering Physics</h3></div>
+            <div class="subject-card" onclick="showUnits('electrical\_mechanical')"><h3>Trends in Electrical and Mechanical Engineering</h3></div>
+            <div class="subject-card" onclick="showUnits('electronics')"><h3>Trends in Electronics Engineering</h3></div>
+            <div class="subject-card" onclick="showUnits('emerging trends 1')"><h3>Emerging Trends 1</h3></div>
+            <div class="subject-card" onclick="showUnits('emerging trends 2')"><h3>Emerging Trends 2</h3></div>
+        </div>
+
+        <div id="unit-viewer">
+            <div class="viewer-header">
+                <h2 id="selected-subject-title">Subject Title</h2>
+                <button class="back-btn" onclick="hideUnits()">← Back to Subjects</button>
+            </div>
+ 
+            <div class="units-list" id="units-container">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // NOTE: Replace these standard placeholder URLs with your real Google Drive links or local file paths later!
+        const samplePDF = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
+
+        const syllabusData = {
+            maths: {
+                title: "Engineering Mathematics 1",
+                units: [
+                    { name: "Unit 1: Matrices & Linear Algebra", desc: "Rank of matrix, Eigenvalues, Cayley-Hamilton Theorem.", pdf: samplePDF },
+                    { name: "Unit 2: Differential Calculus - I", desc: "Successive differentiation, Leibnitz theorem, Rolle's theorem.", pdf: samplePDF },
+                    { name: "Unit 3: Differential Calculus - II", desc: "Partial derivatives, Jacobians, Maxima and Minima.", pdf: samplePDF },
+                    { name: "Unit 4: Multivariable Calculus", desc: "Multiple integrals, Beta & Gamma functions, Volume & Area.", pdf: samplePDF },
+                    { name: "Unit 5: Vector Calculus", desc: "Gradient, Divergence, Curl, Gauss Divergence Theorem.", pdf: samplePDF }
+                ]
+            },
+              maths: {
+                title: "Engineering Mathematics 2",
+                units: [
+                    { name: "Unit 1: Matrices & Linear Algebra", desc: "Rank of matrix, Eigenvalues, Cayley-Hamilton Theorem.", pdf: samplePDF },
+                    { name: "Unit 2: Differential Calculus - I", desc: "Successive differentiation, Leibnitz theorem, Rolle's theorem.", pdf: samplePDF },
+                    { name: "Unit 3: Differential Calculus - II", desc: "Partial derivatives, Jacobians, Maxima and Minima.", pdf: samplePDF },
+                    { name: "Unit 4: Multivariable Calculus", desc: "Multiple integrals, Beta & Gamma functions, Volume & Area.", pdf: samplePDF },
+                    { name: "Unit 5: Vector Calculus", desc: "Gradient, Divergence, Curl, Gauss Divergence Theorem.", pdf: samplePDF }
+                ]
+            },
+            chemistry: {
+                title: "Engineering Chemistry",
+                units: [
+                    { name: "Unit 1: Atomic and Molecular Structure", desc: "Molecular orbitals, aromaticity, and chemical bonding principles.", pdf: samplePDF },
+                    { name: "Unit 2: Spectroscopic Techniques & Applications", desc: "IR, NMR, and UV-Vis spectroscopy mechanics.", pdf: samplePDF },
+                    { name: "Unit 3: Electrochemistry & Corrosion", desc: "Nernst equation, battery types, and corrosion mitigation.", pdf: samplePDF },
+                    { name: "Unit 4: Water Chemistry", desc: "Hardness treatments, Zeolite process, and municipal water purification.", pdf: samplePDF },
+                    { name: "Unit 5: Polymer & Organometallics", desc: "Polymerization types, synthesis structures, and composites.", pdf: samplePDF }
+                ]
+            },
+            physics: {
+                title: "Engineering Physics",
+                units: [
+                    { name: "Unit 1: Quantum Mechanics", desc: "Wave-particle duality, Schrödinger wave equation, and application templates.", pdf: samplePDF },
+                    { name: "Unit 2: Wave Optics", desc: "Interference setups, coherent sources, thin films, and diffraction gratings.", pdf: samplePDF },
+                    { name: "Unit 3: Electromagnetic Field Theory", desc: "Maxwell's equations, displacement currents, and Poynting vector analysis.", pdf: samplePDF },
+                    { name: "Unit 4: Semiconductor Physics", desc: "Band theory, Fermi level variations, and Hall Effect parameters.", pdf: samplePDF },
+                    { name: "Unit 5: Lasers and Fiber Optics", desc: "Einstein coefficients, population inversion, optical fiber parameters.", pdf: samplePDF }
+                ]
+            },
+            electrical_mechanical: {
+                title: "Trends in Electrical and Mechanical Engineering",
+                units: [
+                    { name: "Unit 1: DC & AC Networks", desc: "Kirchhoff's Laws, Mesh analysis, Thevenin's theorem, Phasor concepts.", pdf: samplePDF },
+                    { name: "Unit 2: Electrical Machines", desc: "Principles of DC Generators, single-phase transformers, and induction motors.", pdf: samplePDF },
+                    { name: "Unit 3: Basic Mechanical Systems", desc: "Analysis of forces, beams reactions, shear force and bending moment.", pdf: samplePDF },
+                    { name: "Unit 4: IC Engines & Power Plants", desc: "2-stroke and 4-stroke thermal cycles, electric vehicle fundamentals.", pdf: samplePDF },
+                    { name: "Unit 5: Fluid Machinery & Automation", desc: "Hydraulic pumps, basic pneumatic components, and smart energy grids.", pdf: samplePDF }
+                ]
+            },
+            electronics: {
+                title: "Trends in Electronics Engineering",
+                units: [
+                    { name: "Unit 1: Semiconductor Diodes", desc: "P-N junction diode behaviors, rectifiers, and Zener voltage regulation.", pdf: samplePDF },
+                    { name: "Unit 2: Bipolar Junction Transistors (BJTs)", desc: "CB, CE, CC configurations, biasing techniques, and basic amplification.", pdf: samplePDF },
+                    { name: "Unit 3: Operational Amplifiers (Op-Amps)", desc: "Ideal op-amp metrics, inverting/non-inverting circuits, summers.", pdf: samplePDF },
+                    { name: "Unit 4: Digital Electronics", desc: "Number systems, Boolean algebra logic gates, combinational networks.", pdf: samplePDF },
+                    { name: "Unit 5: Electronic Communication Trends", desc: "Basic modulation templates, IoT communication layers, smart modules.", pdf: samplePDF }
+                ]
+            },
+            emerging: {
+                title: "Emerging Trends 1",
+                units: [
+                    { name: "Unit 1: Smart Materials", desc: "Piezoelectric sensors, shape memory alloys, and polymer composites.", pdf: samplePDF },
+                    { name: "Unit 2: Additive Manufacturing", desc: "3D printing concepts, rapid prototyping models, and design limits.", pdf: samplePDF },
+                    { name: "Unit 3: Internet of Things (IoT)", desc: "Microcontroller setups, smart network nodes, automation paths.", pdf: samplePDF },
+                    { name: "Unit 4: Renewable Systems Architecture", desc: "Photovoltaic arrays, micro-generation platforms, energy-generating structures.", pdf: samplePDF },
+                    { name: "Unit 5: Data Science & AI Overview", desc: "Introduction to foundational neural structures, big data parsing models.", pdf: samplePDF }
+                ]
+            },
+            emerging: {
+                title: "Emerging Trends 2",
+                units: [
+                    { name: "Unit 1: Smart Materials", desc: "Piezoelectric sensors, shape memory alloys, and polymer composites.", pdf: samplePDF },
+                    { name: "Unit 2: Additive Manufacturing", desc: "3D printing concepts, rapid prototyping models, and design limits.", pdf: samplePDF },
+                    { name: "Unit 3: Internet of Things (IoT)", desc: "Microcontroller setups, smart network nodes, automation paths.", pdf: samplePDF },
+                    { name: "Unit 4: Renewable Systems Architecture", desc: "Photovoltaic arrays, micro-generation platforms, energy-generating structures.", pdf: samplePDF },
+                    { name: "Unit 5: Data Science & AI Overview", desc: "Introduction to foundational neural structures, big data parsing models.", pdf: samplePDF }
+                ]
+            }
+        };
+
+        // Screen transition
+        function enterSite() {
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const mainContent = document.getElementById('main-content');
+            welcomeScreen.classList.add('fade-out');
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+                mainContent.style.display = 'block';
+            }, 600);
+        }
+
+        // Dynamically loads unique units based on selected key
+        function showUnits(subjectKey) {
+            document.getElementById('subjects-grid').style.display = 'none';
+            const unitViewer = document.getElementById('unit-viewer');
+            const container = document.getElementById('units-container');
+ 
+            const subjectData = syllabusData[subjectKey];
+            document.getElementById('selected-subject-title').innerText = subjectData.title;
+ 
+            container.innerHTML = "";
+ 
+            subjectData.units.forEach(unit => {
+                const unitHtml = `
+                    <div class="unit-box">
+                        <div class="unit-info">
+                            <h4>${unit.name}</h4>
+                            <p>${unit.desc}</p>
+                        </div>
+                        <a href="${unit.pdf}" target="\_blank" class="pdf-btn">Download PDF</a>
+                    </div>
+                `;
+                container.innerHTML += unitHtml;
+            });
+ 
+            unitViewer.style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function hideUnits() {
+            document.getElementById('unit-viewer').style.display = 'none';
+            document.getElementById('subjects-grid').style.display = 'grid';
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>
